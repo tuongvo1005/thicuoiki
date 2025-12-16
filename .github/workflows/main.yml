@@ -1,27 +1,21 @@
-name: Deploy HTML-PHP to Hosting via FTP
+name: Deploy to InfinityFree (htdocs)
 on:
   push:
     branches:
       - main
 jobs:
-  ftp-deploy:
+  web-deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: 📂 Lấy code mới nhất
-        uses: actions/checkout@v3
-
-      - name: 🚀 Upload lên Hosting (FTP)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          # server-dir là thư mục trên host, thường là /public_html/
-          # Nếu muốn bỏ vào thư mục con thì để /public_html/ten-du-an/
-          server-dir: /public_html/ 
-          # Loại trừ các file không cần upload lên host
-          exclude: |
-            **/.git*
-            **/.github*
-            .gitignore
-            README.md
+    - name: 📂 Get latest code
+      uses: actions/checkout@v3
+    
+    - name: 🚀 FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        # QUAN TRỌNG: Phải là htdocs/ vì hosting của bạn dùng thư mục này
+        server-dir: htdocs/
