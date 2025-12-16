@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Project CI/CD</title>
+    <title>Dự án HTML - PHP</title>
 </head>
 <body>
-  <h1>Welcome to Exam Project v2</h1>
-    <p id="api-data">Loading data...</p>
+    <h1>Frontend HTML</h1>
+    <p>Kết quả từ Backend PHP:</p>
+    <div id="result" style="color: blue; font-weight: bold;">Đang tải...</div>
 
     <script>
-        // Giả lập gọi API
-        fetch('https://your-backend-url.onrender.com/api/data')
+        // Gọi file api.php nằm cùng thư mục trên host
+        fetch('api.php')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('api-data').innerText = data.message;
+                document.getElementById('result').innerText = data.message;
             })
-            .catch(err => {
-                console.log("Chưa kết nối backend hoặc lỗi mạng");
+            .catch(error => {
+                document.getElementById('result').innerText = "Lỗi kết nối Backend!";
+                console.error('Error:', error);
             });
     </script>
 </body>
