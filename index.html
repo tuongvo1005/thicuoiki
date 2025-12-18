@@ -2,25 +2,22 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dự án HTML - PHP</title>
+    <title>Bài thi Võ Phúc Tường</title>
 </head>
 <body>
-    <h1>Frontend HTML</h1>
-    <p>Kết quả từ Backend PHP:</p>
-    <p>Tui là tường</p>
-    <div id="result" style="color: blue; font-weight: bold;">Đang tải...</div>
+    <h1> Thi Thứ Năm_Ca 4_Võ Phúc Tường</h1>
+    
+    <h2>Kết quả kết nối Backend:</h2>
+    <div id="result" style="color: blue;">Đang tải...</div>
 
     <script>
-        // Gọi file api.php nằm cùng thư mục trên host
         fetch('api.php')
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
                 document.getElementById('result').innerText = data.message;
             })
-            .catch(error => {
-                document.getElementById('result').innerText = "Lỗi kết nối Backend!";
-                console.error('Error:', error);
+            .catch(err => {
+                document.getElementById('result').innerText = "Lỗi kết nối!";
             });
     </script>
 </body>
